@@ -29,6 +29,16 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+    public Student patchStudent(Long id, Student student) {
+        Student target = findStudentById(id);
+
+        if (student.getFullName() != null) target.setFullName(student.getFullName());
+        if (student.getEmail() != null)    target.setEmail(student.getEmail());
+        if (student.getGpa() != null)      target.setGpa(student.getGpa());
+
+        return studentRepository.save(target);
+    }
+
     public void deleteStudent(Long id){
         studentRepository.deleteById(id);
     }

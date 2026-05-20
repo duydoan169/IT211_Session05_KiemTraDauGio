@@ -46,6 +46,15 @@ public class StudentController {
         return new ResponseEntity<>(studentService.putStudent(id, student) ,HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Student> patchStudent(@PathVariable Long id, @RequestBody Student student) {
+        Student target = studentService.findStudentById(id);
+        if (target == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(studentService.patchStudent(id, student));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Student> deleteStudent(@PathVariable Long id){
         Student target = studentService.findStudentById(id);
